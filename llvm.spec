@@ -7,7 +7,7 @@
 
 Name:		llvm
 Version:	3.8.0
-Release:	2%{?dist}
+Release:	2%{?dist}.pi1
 Summary:	The Low Level Virtual Machine
 
 License:	NCSA
@@ -82,6 +82,7 @@ cd _build
 
 # force off shared libs as cmake macros turns it on.
 %cmake .. \
+	-DSPHINX_WARNINGS_AS_ERRORS:BOOL=OFF \
 	-DBUILD_SHARED_LIBS:BOOL=OFF \
 	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DCMAKE_SHARED_LINKER_FLAGS="-Wl,-Bsymbolic -static-libstdc++" \
@@ -179,6 +180,9 @@ make check-all || :
 %{_libdir}/*.a
 
 %changelog
+* Wed Nov 23 2016 Lubomir Rintel <lkundrak@v3.sk> - 3.8.0-2.pi1
+- Tolerate warnings from newer sphinx
+
 * Tue Jun 07 2016 Jan Vcelak <jvcelak@fedoraproject.org> - 3.8.0-2
 - fix color support detection on terminal
 
